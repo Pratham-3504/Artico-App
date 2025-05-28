@@ -1,8 +1,10 @@
 package com.Journal.project.controller;
 
+import com.Journal.project.api.response.WeatherRoot;
 import com.Journal.project.repository.UserRepos;
 import com.Journal.project.service.UserService;
 import com.Journal.project.entity.User;
+import com.Journal.project.service.weatherService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.cglib.core.AbstractClassGenerator.getCurrent;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -22,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserRepos userRepository;
+
+    @Autowired
+    private weatherService weatherService;
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user){
@@ -44,6 +51,11 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> greeting(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<>("Hi" + authentication.getName(), HttpStatus.OK);
+        WeatherRoot weatherRoot  = weatherService.getWeather("Mumbai");
+        String response = "";
+        if (weatherRoot != null) {
+            response = "\nWeather feels like " + weatherRoot.getCurrent().getTemperature();
+        }
+        return new ResponseEntity<>("Hi " + authentication.getName() + response + " " + weatherRoot.getCurrent().getWeatherDescriptions().get(0), HttpStatus.OK);
     }
 }
