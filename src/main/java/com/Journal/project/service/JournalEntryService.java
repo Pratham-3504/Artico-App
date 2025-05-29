@@ -22,6 +22,9 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private textToSpeechService textToSpeechServices;
+
     @Transactional
     public void saveJournalEntryOfUser(JournalEntry journalEntry, String userName){
         try {

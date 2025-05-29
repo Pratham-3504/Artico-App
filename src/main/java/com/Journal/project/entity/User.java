@@ -30,5 +30,8 @@ public class User {
     @DBRef
     List<JournalEntry> journalEntries = new ArrayList<>();
 
+    @DBRef
+    List<textToSpeech> textToSpeeches = new ArrayList<>();
+
     List<String> roles = new ArrayList<>();
 }
