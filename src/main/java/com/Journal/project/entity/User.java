@@ -24,14 +24,15 @@ public class User {
     @NonNull
     private String userName;
 
+    private String email;
+
+    private boolean sentimentAnalysis;
+
     @NonNull
     private String password;
 
     @DBRef
     List<JournalEntry> journalEntries = new ArrayList<>();
-
-    @DBRef
-    List<textToSpeech> textToSpeeches = new ArrayList<>();
 
     List<String> roles = new ArrayList<>();
 }
