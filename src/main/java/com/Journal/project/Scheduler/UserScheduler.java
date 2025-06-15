@@ -29,19 +29,17 @@ public class UserScheduler {
     @Autowired
     private AppCache appCache;
 
-
+    @Scheduled(cron = "0 0/1 * 1/1 * ?")
     public void fetchUserAndSendMail(){
         List<User> users = userRepository.getAllUserForSA();
         for(User user : users){
-            List<JournalEntry> entries = user.getJournalEntries();
-            List<String> filteredEntries = entries.stream().filter(x -> x.getDate().isAfter(LocalDateTime.now().minus(7, ChronoUnit.DAYS))).map(x->x.getContent()).collect(Collectors.toList());
-            String entry = String.join("", filteredEntries);
+            String entry = "hello Pratham Soni dev here";
             String sentiment = sentimentAnalysisService.getSentiment(entry);
             emailService.sendEmail(user.getEmail(), "sentiment for 7 days", sentiment);
         }
     }
 
-    @Scheduled(cron = "0 0 12 ? * SUN")
+    @Scheduled(cron = "0 0/1 * 1/1 * ?")
     public void clearAppCache(){
         appCache.init();
     }

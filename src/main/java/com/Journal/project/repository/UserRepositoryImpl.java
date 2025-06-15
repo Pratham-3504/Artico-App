@@ -18,12 +18,13 @@ public class UserRepositoryImpl {
     public List<User> getAllUserForSA() {
         Query query = new Query();
         //normal Query with where clause....
-        query.addCriteria(Criteria.where("userName").is("Pratham_soni"));
-
+        query.addCriteria(Criteria.where("userName").is("Pratham1744"));
         //query for checking the email and sentiment Analysis field...
         // this both line combine create a AND operation..
         query.addCriteria(Criteria.where("email").regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$\n"));
         query.addCriteria(Criteria.where("sentimentAnalysis").is("true"));
+        List<User> users = mongoTemplate.findAll(User.class);
+        return users;
 
         // query for OR operation..
 //        Criteria criteria = new Criteria();
@@ -37,7 +38,5 @@ public class UserRepositoryImpl {
         //query for giving multiple values as arguement...
 //        query.addCriteria(Criteria.where("userName").in("Pratham","Suhani"));
 
-        List<User> users = mongoTemplate.find(query, User.class);
-        return users;
     }
 }

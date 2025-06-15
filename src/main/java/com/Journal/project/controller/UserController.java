@@ -51,7 +51,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> greeting(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        WeatherRoot weatherRoot  = weatherService.getWeather("Mumbai");
+        WeatherRoot weatherRoot  = weatherService.getWeather("London");
         String response = "";
         if (weatherRoot != null) {
             response = "\nWeather feels like " + weatherRoot.getCurrent().getTemperature();
