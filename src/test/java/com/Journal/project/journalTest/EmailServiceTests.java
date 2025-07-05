@@ -17,6 +17,7 @@ public class EmailServiceTests {
     @Autowired
     private UserScheduler userScheduler;
 
+//    @Disabled
     @Test
     public void regulatoryEmailServiceTest(){
         userScheduler.fetchUserAndSendMail();

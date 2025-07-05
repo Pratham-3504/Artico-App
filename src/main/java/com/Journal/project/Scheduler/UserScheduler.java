@@ -29,7 +29,7 @@ public class UserScheduler {
     @Autowired
     private AppCache appCache;
 
-    @Scheduled(cron = "0 0/1 * 1/1 * ?")
+
     public void fetchUserAndSendMail(){
         List<User> users = userRepository.getAllUserForSA();
         for(User user : users){
