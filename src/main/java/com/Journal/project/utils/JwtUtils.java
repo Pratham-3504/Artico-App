@@ -41,7 +41,7 @@ public class JwtUtils {
     }
 
     public Boolean validateToken(String token){
-        return isTokenExpired(token);
+        return !isTokenExpired(token);
     }
 
     public String generateToken(String userName){
